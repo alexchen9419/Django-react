@@ -1,0 +1,27 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# 安裝系統依賴（用於OpenCV）
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 複製依賴文件並安裝
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 複製應用代碼
+COPY backend/ .
+
+# 設置環境變量
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_DEBUG=1
+
+# 暴露端口
+EXPOSE 8000
+
+# 啟動命令
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "camera_app.wsgi:application"]

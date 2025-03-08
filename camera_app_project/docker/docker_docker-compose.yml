@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: camera_app_backend
+    restart: unless-stopped
+    volumes:
+      # 資料庫持久化
+      - sqlite_data:/app/db.sqlite3
+      # 開發模式下，掛載代碼目錄（可選）
+      # - ../backend:/app
+    environment:
+      - DJANGO_DEBUG=1
+    devices:
+      # 掛載攝影機設備
+      - /dev/video0:/dev/video0
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: camera_app_frontend
+    restart: unless-stopped
+    ports:
+      # 對外暴露80端口
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  sqlite_data:
+    driver: local
