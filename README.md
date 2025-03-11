@@ -1,155 +1,155 @@
-# Camera App Project
+# 相機應用程式專案
 
-A full-stack web application featuring camera streaming with image processing capabilities, built with Django backend, React frontend, and Docker containerization.
+一個全棧網頁應用程式，具有相機串流和圖像處理功能，使用 Django 後端、React 前端和 Docker 容器化技術構建。
 
-## Created by: alexchen9419
-## Date: 2025-02-18
+## 創建者: alexchen9419
+## 日期: 2025-03-08
 
-## 📋 Features
+## 📋 功能
 
-- **Django Backend:**
-  - REST API with GET, POST, PUT, DELETE endpoints
-  - Internal and external request handling via port-forwarding
-  - Camera streaming functionality
-  - Real-time grayscale image processing
-  - SQLite database integration
+- **Django 後端:**
+  - 提供 GET、POST、PUT、DELETE 端點的 REST API
+  - 通過端口轉發處理內部和外部請求
+  - 相機串流功能
+  - 實時灰度圖像處理
+  - 整合 SQLite 資料庫
 
-- **React Frontend:**
-  - Form components (input fields, dropdowns, buttons)
-  - Camera stream display
-  - Data fetching and manipulation interface
-  - Responsive design with Bootstrap
+- **React 前端:**
+  - 表單組件（輸入欄位、下拉選單、按鈕）
+  - 相機串流顯示
+  - 數據獲取和操作界面
+  - 使用 Bootstrap 的響應式設計
 
-- **Docker Integration:**
-  - Complete containerization of both frontend and backend
-  - Volume mounting for data persistence
-  - Container orchestration via Docker Compose
+- **Docker 整合:**
+  - 完整的前端和後端容器化
+  - 資料持久化的卷掛載
+  - 通過 Docker Compose 進行容器編排
 
-## 🔧 Requirements
+## 🔧 需求
 
-- Docker and Docker Compose
-- Web camera connected to your system
-- For development: Python 3.9+, Node.js 16+
+- Docker 和 Docker Compose
+- 系統連接的網絡攝像頭
+- 開發環境: Python 3.9+，Node.js 16+
 
-## 🚀 Quick Start
+## 🚀 快速開始
 
-### Using Docker (Recommended)
+### 使用 Docker（推薦）
 
-1. Clone this repository:
+1. 克隆此存儲庫:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/alexchen9419/Django-react
    cd camera_app_project
    ```
 
-2. Build and start the containers:
+2. 構建並啟動容器:
    ```bash
    cd docker
    docker-compose up --build
    ```
 
-3. Access the application:
-   - Frontend: http://localhost
-   - Backend API: http://localhost/api/
-   - Camera Stream: http://localhost/camera/
+3. 訪問應用程式:
+   - 前端: http://localhost
+   - 後端 API: http://localhost/api/
+   - 相機串流: http://localhost/camera/
 
-### Manual Development Setup
+### 手動開發設置
 
-#### Backend Setup:
+#### 後端設置:
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # Linux/Mac or venv\Scripts\activate on Windows
+source venv/bin/activate  # Linux/Mac 或 venv\Scripts\activate 在 Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
 
-#### Frontend Setup:
+#### 前端設置:
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-## 📖 Usage Guide
+## 📖 使用指南
 
-### API Endpoints
+### API 端點
 
-- **GET /api/internal-get/**: Test internal GET request
-- **GET /api/external-get/**: Test external GET request (via port-forwarding)
-- **GET /api/items/**: List all items
-- **POST /api/items/**: Create a new item
-- **GET /api/items/{id}/**: Retrieve a specific item
-- **PUT /api/items/{id}/**: Update a specific item
-- **DELETE /api/items/{id}/**: Delete a specific item
-- **GET /camera/**: View camera stream in browser
-- **GET /camera/grayscale/**: View grayscale processed camera stream
+- **GET /api/internal-get/**: 測試內部 GET 請求
+- **GET /api/external-get/**: 測試外部 GET 請求（通過端口轉發）
+- **GET /api/items/**: 列出所有項目
+- **POST /api/items/**: 創建新項目
+- **GET /api/items/{id}/**: 獲取特定項目
+- **PUT /api/items/{id}/**: 更新特定項目
+- **DELETE /api/items/{id}/**: 刪除特定項目
+- **GET /camera/**: 在瀏覽器中查看相機串流
+- **GET /camera/grayscale/**: 查看灰度處理的相機串流
 
-### Frontend Pages
+### 前端頁面
 
-- **Home**: Dashboard with API test results
-- **Items**: CRUD operations for database items
-- **Camera View**: Live camera stream with grayscale processing option
+- **首頁**: 帶有 API 測試結果的儀表板
+- **項目**: 資料庫項目的 CRUD 操作
+- **相機視圖**: 實時相機串流，具有灰度處理選項
 
-## 🏗️ Project Structure
+## 🏗️ 專案結構
 
 ```
 camera_app_project/
-├── backend/                # Django backend
-│   ├── api/                # API application
-│   ├── camera_app/         # Main project config
-│   ├── camera_stream/      # Camera streaming application
-│   ├── db.sqlite3          # SQLite database
+├── backend/                # Django 後端
+│   ├── api/                # API 應用
+│   ├── camera_app/         # 主項目配置
+│   ├── camera_stream/      # 相機串流應用
+│   ├── db.sqlite3          # SQLite 資料庫
 │   ├── manage.py
-│   └── requirements.txt    # Backend dependencies
-├── frontend/               # React frontend
+│   └── requirements.txt    # 後端依賴
+├── frontend/               # React 前端
 │   ├── public/
 │   ├── src/
 │   ├── package.json
 │   └── ...
-└── docker/                 # Docker configuration
+└── docker/                 # Docker 配置
     ├── Dockerfile.backend
     ├── Dockerfile.frontend
     ├── docker-compose.yml
     └── nginx.conf
 ```
 
-## 🔍 Key Implementation Details
+## 🔍 主要實現細節
 
-### 1. Camera Streaming
-The application captures video from the connected camera and streams it to the browser using multipart HTTP responses.
+### 1. 相機串流
+應用程式從連接的相機捕獲視頻，並使用多部分 HTTP 響應將其串流到瀏覽器。
 
-### 2. Image Processing
-Simple image processing is implemented using OpenCV to convert the camera stream to grayscale.
+### 2. 圖像處理
+使用 OpenCV 實現簡單的圖像處理，將相機串流轉換為灰度圖像。
 
-### 3. Database Operations
-Complete CRUD operations are available through both the API and frontend interface.
+### 3. 資料庫操作
+通過 API 和前端界面提供完整的 CRUD 操作。
 
-### 4. Data Persistence
-Docker volumes are used to persist the SQLite database across container restarts.
+### 4. 數據持久化
+Docker 卷用於在容器重啟期間持久化 SQLite 資料庫。
 
-## 🛠️ Technologies Used
+## 🛠️ 使用技術
 
-- **Backend**: Django, Django REST framework, OpenCV
-- **Frontend**: React, Axios, React Router, Bootstrap
-- **Database**: SQLite
-- **Containerization**: Docker, Docker Compose
-- **Web Server**: Nginx (in production mode)
+- **後端**: Django, Django REST framework, OpenCV
+- **前端**: React, Axios, React Router, Bootstrap
+- **資料庫**: SQLite
+- **容器化**: Docker, Docker Compose
+- **網頁伺服器**: Nginx（生產模式）
 
-## ⚠️ Important Notes
+## ⚠️ 重要說明
 
-1. **Camera Access**: Ensure your user or Docker has permission to access the camera device (/dev/video0).
-2. **Security**: This is a demonstration setup. For production, implement proper security measures like HTTPS, restricted CORS, etc.
-3. **Port Forwarding**: The setup demonstrates port-forwarding by exposing container services to external machines.
+1. **相機訪問**: 確保您的用戶或 Docker 有權訪問相機設備 (/dev/video0)。
+2. **安全性**: 這是一個演示設置。對於生產環境，請實施適當的安全措施，如 HTTPS、限制 CORS 等。
+3. **端口轉發**: 該設置通過將容器服務暴露給外部機器來演示端口轉發。
 
-## 🤝 Contributing
+## 🤝 貢獻
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork 此存儲庫
+2. 創建您的功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 打開 Pull Request
 
-## 📄 License
+## 📄 授權
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+此專案根據 MIT 許可證授權 - 詳情請參閱 LICENSE 文件。
